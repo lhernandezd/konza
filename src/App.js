@@ -1,30 +1,18 @@
 import React, { Component } from 'react';
 import DataTable from './components/DataTable'
+import http from './services/http';
+import config from './config.json';
 
 export default class App extends Component {
   state = {
-    tasks: [{
-      _id: '1',
-      title: 'Setup project',
-      projectId: {
-        title: 'Project 1'
-      },
-      userId: {
-        name: 'Gustavo Morales'
-      },
-      completed: false 
-    },{
-      _id: '2',
-      title: 'Layout',
-      projectId: {
-        title: 'Project 1'
-      },
-      userId: {
-        name: 'Gustavo Morales'
-      },
-      completed: true
-    }]
+    tasks: []
   }
+
+  async componentDidMount() {
+    const { data } = await http.get(`${config.baseUrl}/tasks`);
+    const { data: tasks } = data;
+    this.setState({ tasks });
+  }  
 
   handleRemove = (id) => {
     let tasks = [...this.state.tasks];
@@ -51,4 +39,6 @@ export default class App extends Component {
       </div>
     )
   }
+
+
 };

@@ -16,9 +16,9 @@ export default function DataTable(props) {
       <tbody>
         { items.map(item => 
           <tr key={item._id}>
-            <td>{item.projectId.title}</td>
+            <td>{item.projectId && item.projectId.title}</td>
             <td>{item.title}</td>
-            <td>{item.userId.name}</td>
+            <td>{item.userId && item.userId.fullname}</td>
             <td>{item.completed ? "Completed" : "Pending"}</td>
             <td>
               <button 
