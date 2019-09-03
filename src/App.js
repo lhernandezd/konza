@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import DataTable from './components/DataTable'
 import http from './services/http';
 import config from './config.json';
+import TaskTable from './components/TaskTable';
 
 export default class App extends Component {
   state = {
@@ -27,7 +27,6 @@ export default class App extends Component {
 
   render() {
     const { tasks } = this.state;
-    const count = tasks.length;
 
     return (
       <div className="container">
@@ -37,8 +36,7 @@ export default class App extends Component {
           </div>
           <div className="col">
             <h2>Tasks</h2>
-            <p>Displaying {count} items</p>
-            <DataTable items={tasks} remove={this.handleRemove} />
+            <TaskTable tasks={tasks} remove={this.handleRemove} />
           </div>
         </div>
       </div>
