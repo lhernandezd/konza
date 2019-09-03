@@ -14,10 +14,15 @@ export default class App extends Component {
     this.setState({ tasks });
   }  
 
-  handleRemove = (id) => {
+  handleRemove = async (id) => {
     let tasks = [...this.state.tasks];
-    const updatedTasks = tasks.filter(task => task._id !== id);
-    this.setState({ tasks: updatedTasks});
+    try {
+      await http.delete(`${config.baseUrl}/tasks/${id}`);
+      const updatedTasks = tasks.filter(task => task._id !== id);
+      this.setState({ tasks: updatedTasks});
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   render() {
