@@ -2,17 +2,25 @@ import React, { Component } from 'react';
 import http from './services/http';
 import config from './config.json';
 import TaskTable from './components/TaskTable';
+import Pagination from './common/Pagination';
 
 export default class App extends Component {
   state = {
-    tasks: []
+    tasks: [],
+    page: 1,
+    pages: 1
   }
 
-  async componentDidMount() {
-    const { data } = await http.get(`${config.baseUrl}/tasks`);
-    const { data: tasks } = data;
-    this.setState({ tasks });
-  }  
+  componentDidMount() {
+    this.loadTasks();  
+  }
+
+  loadTasks = async (nextPage = 1) => {
+    const { data } = await http.get(`${config.baseUrl}/tasks?page=${nextPage}`);
+    const { data: tasks, meta: { page, pages } } = data;
+    
+    this.setState({ tasks, page, pages });
+  }
 
   handleRemove = async (id) => {
     let tasks = [...this.state.tasks];
@@ -25,8 +33,12 @@ export default class App extends Component {
     }
   }
 
+  handleSelectPage = (nextPage) => {
+    this.loadTasks(nextPage);
+  }
+
   render() {
-    const { tasks } = this.state;
+    const { tasks, page, pages } = this.state;
 
     return (
       <div className="container">
@@ -37,6 +49,7 @@ export default class App extends Component {
           <div className="col">
             <h2>Tasks</h2>
             <TaskTable tasks={tasks} remove={this.handleRemove} />
+            <Pagination page={page} pages={pages} onSelectPage={this.handleSelectPage} />
           </div>
         </div>
       </div>
