@@ -1,8 +1,12 @@
-import React from 'react'
-import Tasks from './pages/Tasks'
+import React, { Fragment } from 'react';
+import Tasks from './pages/Tasks';
+import NavBar from './components/NavBar';
 
 export default function App() {
   return (
-    <Tasks />
+    <Fragment>
+      <NavBar />
+      <Tasks />
+    </Fragment>
   )
 }
