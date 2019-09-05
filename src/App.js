@@ -10,7 +10,8 @@ export default function App() {
     <Fragment>
       <NavBar />
       <Switch>
-        <Route path="/tasks" component={Tasks} />
+        <Route path="/tasks" render={(props) => <Tasks {...props} user="Gustavo" />} />
+        <Route path="/projects/:id" component={Projects} />
         <Route path="/projects" component={Projects} />
         <Route path="/users" component={Users} />
         <Redirect to="/tasks" />
