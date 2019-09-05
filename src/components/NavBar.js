@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 
 export default function NavBar() {
   return (
@@ -6,7 +7,7 @@ export default function NavBar() {
       className="navbar navbar-expand-lg navbar-light bg-light"
       style={{ marginBottom: 20}}
     >
-      <a className="navbar-brand" href="#">Konza</a>
+      <NavLink to="/" className="navbar-brand">Konza</NavLink>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -14,13 +15,13 @@ export default function NavBar() {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            <a className="nav-link" href="#">Tasks</a>
+            <NavLink to="/tasks" className="nav-link">Tasks</NavLink>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">Projects</a>
+            <NavLink to="/projects" className="nav-link">Projects</NavLink>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">Users</a>
+            <NavLink to="/users" className="nav-link">Users</NavLink>
           </li>
         </ul>
       </div>
