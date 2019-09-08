@@ -24,6 +24,14 @@ export default function NavBar() {
             <NavLink to="/users" className="nav-link">Users</NavLink>
           </li>
         </ul>
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <NavLink to="/signin" className="nav-link">Sign In</NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/signup" className="nav-link">Sign Up</NavLink>
+          </li>
+        </ul>
       </div>
     </nav>
   )
