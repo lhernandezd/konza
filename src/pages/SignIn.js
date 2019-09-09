@@ -1,15 +1,24 @@
 import React, { Component } from "react";
 import config from "./../config.json";
 import http from "../services/http";
+import { setToken } from "../services/auth";
 
 export default class Signin extends Component {
   handleClick = async (e) => {
     e.preventDefault();
     const [email, password] = e.target.elements;
-    await http.post(`${config.baseUrl}/users/signin`, { 
+    const payload = { 
       email: email.value, 
       password: password.value
-    });
+    };
+    try {
+      const { data: { meta: { token } } } = await http.post(`${config.baseUrl}/users/signin`, payload);
+      setToken(token);
+      this.props.history.push("/");
+    } catch (err) {
+      console.error(err);
+    }
+
   }
 
   render() {

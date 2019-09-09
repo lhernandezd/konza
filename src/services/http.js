@@ -1,4 +1,7 @@
 import axios from "axios";
+import { getToken } from "./auth";
+
+axios.defaults.headers.common['Authorization'] = "Bearer " + getToken();
 
 const http = {
   get(url) {
