@@ -12,8 +12,9 @@ export default class Signin extends Component {
       password: password.value
     };
     try {
-      const { data: { meta: { token } } } = await http.post(`${config.baseUrl}/users/signin`, payload);
+      const { data: { data, meta: { token } } } = await http.post(`${config.baseUrl}/users/signin`, payload);
       setToken(token);
+      this.props.setUser(data);
       this.props.history.push("/");
     } catch (err) {
       console.error(err);
